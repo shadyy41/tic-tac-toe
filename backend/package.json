@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "shadyy41",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV='dev' nodemon app.js",
+    "prod": "NODE_ENV='production' node app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "email-validator": "^2.0.4",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.4",
+    "sanitize-html": "^2.8.1"
+  }
+}
