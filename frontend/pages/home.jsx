@@ -67,10 +67,3 @@ export default function Home() {
   </div>
   </>
 }
-/*
-configure socket io
-setup room system
-init config on room creation
-push match into user invitations
-insert finished config into database
-*/
