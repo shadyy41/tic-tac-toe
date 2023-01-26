@@ -6,7 +6,7 @@ import store from '../src/store/store'
 import AuthInit from '@/src/authInit';
 
 export default function App({ Component, pageProps }) {
-  return <main className='h-full w-full sm:h-fit sm:w-80 sm:border border-blue-200 rounded-lg'>
+  return <main className='h-full w-full sm:w-96 sm:border border-blue-200 rounded-lg'>
     <Provider store = {store}>
       <AuthInit/>
       <NextNProgress options={{ showSpinner: false }}/>

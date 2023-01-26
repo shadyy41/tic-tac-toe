@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import router from "next/router"
 import { useDispatch } from 'react-redux'
 import { login } from '@/src/store/userSlice'
+import { v4 as uuidv4 } from "uuid"
 import toast from 'react-hot-toast'
 import Link from "next/link"
 import GameCard from "@/components/GameCard"
@@ -11,15 +12,14 @@ import HistoryGameCard from "@/components/HistoryGameCard"
 export default function Home() {
   const userData = useSelector((state)=>state.user)
   const activeGameData = useSelector((state)=>state.activegame)
-  const {userGames, setUserGames} = useState(null)
+  const [userGames, setUserGames] = useState(null)
   const dispatch = useDispatch()
 
   const getResponse = async()=>{
     try{
-      const res = await fetch(`https://tic-tac-toe-backend-mm5k.onrender.com/userdata/${userData.username}`)
+      const res = await fetch(`https://tictactoe41.vercel.app/userdata/${userData.username}`)
       const parsed = await res.json()
       if(!parsed.success) throw new Error()
-      console.log(parsed.data.games)
       setUserGames(parsed.data.games)
     }catch(e){
       console.log(e)
@@ -64,7 +64,7 @@ export default function Home() {
 
   return <>
   <div className='flex flex-col items-center w-full h-full justify-center'>
-    <header className='text-left w-full h-full flex justify-begin flex-col p-4 gap-4'>
+    <header className='text-left w-full flex justify-begin flex-col p-4 gap-4'>
       <button className="text-left text-md text-blue-300" onClick={handleLogout}>
         Logout
       </button>
@@ -76,12 +76,12 @@ export default function Home() {
           Your Games
         </h2>
       </div>
-      <div className="w-full flex flex-col gap-4 font-medium flex-shrink-0 text-lg">
-        {userGames && userGames.map(g=><HistoryGameCard url={`/game/${g.id}`} enemy={userData.username==g.user1 ? g.user2 : g.user1} data={g}/>)}
-        {activeGameData.gameState && <GameCard enemy={getEnemy()} data={activeGameData} url="/game/active"/>}
-      </div>
     </header>
-    <div className="w-full flex flex-col gap-4 px-4 pb-4 font-semibold flex-shrink-0 text-lg">
+    <div className="w-full flex flex-col gap-4 font-medium flex-shrink-0 text-lg px-4 overflow-auto flex-1">
+      {userGames && userGames.map(g=><HistoryGameCard url={`/game/${g.id}`} enemy={userData.username==g.user1 ? g.user2 : g.user1} data={g} key={uuidv4()}/>)}
+      {activeGameData.gameState && <GameCard enemy={getEnemy()} data={activeGameData} url="/game/active"/>}
+    </div>
+    <div className="w-full flex flex-col gap-4 p-4 font-semibold text-lg">
       <Link href={"/game/new"}>
         <button className='w-full py-2 bg-blue-500 rounded-lg hover:bg-blue-400'>
           Start a new game
