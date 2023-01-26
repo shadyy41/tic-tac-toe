@@ -78,8 +78,11 @@ export default function Home() {
       </div>
     </header>
     <div className="w-full flex flex-col gap-4 font-medium flex-shrink-0 text-lg px-4 overflow-auto flex-1">
-      {userGames && userGames.map(g=><HistoryGameCard url={`/game/${g.id}`} enemy={userData.username==g.user1 ? g.user2 : g.user1} data={g} key={uuidv4()}/>)}
       {activeGameData.gameState && <GameCard enemy={getEnemy()} data={activeGameData} url="/game/active"/>}
+      {userGames && userGames.map(g=><HistoryGameCard url={`/game/${g.id}`} enemy={userData.username==g.user1 ? g.user2 : g.user1} data={g} key={uuidv4()}/>)}
+      {!userGames && !activeGameData.gameState && <h2 className='text-xl'>
+          No Games Found
+        </h2>}
     </div>
     <div className="w-full flex flex-col gap-4 p-4 font-semibold text-lg">
       <Link href={"/game/new"}>
