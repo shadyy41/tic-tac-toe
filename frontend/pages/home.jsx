@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux'
 import { login } from '@/src/store/userSlice'
 import toast from 'react-hot-toast'
 import Link from "next/link"
+import GameCard from "@/components/GameCard"
 
 export default function Home() {
   const userData = useSelector((state)=>state.user)
+  const activeGameData = useSelector((state)=>state.activegame)
   const {userGames, setUserGames} = useState(null)
   const dispatch = useDispatch()
 
@@ -16,6 +18,10 @@ export default function Home() {
       router.push('/')
     }
   }, [userData.loggedIn])
+
+  const getEnemy = ()=>{
+    return userData.username===activeGameData.user1 ? activeGameData.user2: activeGameData.user1
+  }
 
   const handleLogout = async()=>{
     const res = await fetch("http://localhost:3001/auth/signout", {
@@ -47,14 +53,15 @@ export default function Home() {
       </button>
       <div>
         <h2 className='text-lg'>
-          Signed In as {userData.username}
+          Signed in as {userData.username}
         </h2>
-        <h2 className='text-2xl font-bold'>
+        <h2 className='text-xl font-semibold'>
           Your Games
         </h2>
       </div>
       <div className="w-full flex flex-col gap-4 font-medium flex-shrink-0 text-lg">
         {userGames ? <div></div> : <h2>No Games Found</h2>}
+        {activeGameData.gameState ? <GameCard enemy={getEnemy()} data={activeGameData} url="/game/active"/> : <></>}
       </div>
     </header>
     <div className="w-full flex flex-col gap-4 px-4 pb-4 font-semibold flex-shrink-0 text-lg">

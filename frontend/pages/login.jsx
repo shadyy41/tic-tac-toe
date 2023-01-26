@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '@/src/store/userSlice'
 import toast from 'react-hot-toast'
+import Back from '@/components/Back'
 
 export default function Login() {
   const router = useRouter()
@@ -58,9 +59,7 @@ export default function Login() {
   return <>
   <div className='flex flex-col items-center w-full h-full justify-center'>
     <header className='text-left w-full h-full flex justify-begin flex-col p-4 gap-4'>
-      <button className="text-left text-3xl" onClick={()=>router.back()}>
-        &#8592;
-      </button>
+      <Back/>
       <div>
         <h2 className='text-lg'>
           Login
