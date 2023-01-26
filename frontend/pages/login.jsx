@@ -27,7 +27,7 @@ export default function Login() {
       return
     }
 
-    const res = await fetch("https://tictactoe41.vercel.app/auth/signin", {
+    const res = await fetch("https://tic-tac-toe-backend-mm5k.onrender.com/auth/signin", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

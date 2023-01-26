@@ -17,7 +17,7 @@ export default function Home() {
 
   const getResponse = async()=>{
     try{
-      const res = await fetch(`https://tictactoe41.vercel.app/userdata/${userData.username}`)
+      const res = await fetch(`https://tic-tac-toe-backend-mm5k.onrender.com/userdata/${userData.username}`)
       const parsed = await res.json()
       if(!parsed.success) throw new Error()
       setUserGames(parsed.data.games)
