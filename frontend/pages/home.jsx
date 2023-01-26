@@ -24,7 +24,7 @@ export default function Home() {
   }
 
   const handleLogout = async()=>{
-    const res = await fetch("http://localhost:3001/auth/signout", {
+    const res = await fetch("https://tic-tac-toe-backend-mm5k.onrender.com//auth/signout", {
       credentials: 'include',
       method: 'GET',
       mode: 'cors'
