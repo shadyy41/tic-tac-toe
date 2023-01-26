@@ -8,7 +8,7 @@ export default function Index() {
   const userData = useSelector((state)=>state.user)
   useEffect(()=>{
     if(userData.loggedIn){
-      router.push('/home')
+      router.replace('/home')
     }
   }, [userData.loggedIn])
   return (

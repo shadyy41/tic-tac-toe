@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { router } from 'next/router'
+import router from "next/router"
 import { useDispatch } from 'react-redux'
 import { login } from '@/src/store/userSlice'
 import toast from 'react-hot-toast'
 import Link from "next/link"
 import GameCard from "@/components/GameCard"
+import HistoryGameCard from "@/components/HistoryGameCard"
 
 export default function Home() {
   const userData = useSelector((state)=>state.user)
@@ -13,9 +14,26 @@ export default function Home() {
   const {userGames, setUserGames} = useState(null)
   const dispatch = useDispatch()
 
+  const getResponse = async()=>{
+    try{
+      const res = await fetch(`https://tic-tac-toe-backend-mm5k.onrender.com/userdata/${userData.username}`)
+      const parsed = await res.json()
+      if(!parsed.success) throw new Error()
+      console.log(data.games)
+      setUserGames(parsed.data.games)
+    }catch(e){
+      console.log(e)
+      router.replace('/')
+    }
+  }
+
+  useEffect(()=>{
+    getResponse()
+  }, [])
+
   useEffect(()=>{
     if(!userData.loggedIn){
-      router.push('/')
+      router.replace('/')
     }
   }, [userData.loggedIn])
 
@@ -24,7 +42,7 @@ export default function Home() {
   }
 
   const handleLogout = async()=>{
-    const res = await fetch("https://tic-tac-toe-backend-mm5k.onrender.com//auth/signout", {
+    const res = await fetch("https://tic-tac-toe-backend-mm5k.onrender.com/auth/signout", {
       credentials: 'include',
       method: 'GET',
       mode: 'cors'
@@ -61,6 +79,7 @@ export default function Home() {
       </div>
       <div className="w-full flex flex-col gap-4 font-medium flex-shrink-0 text-lg">
         {userGames ? <div></div> : <h2>No Games Found</h2>}
+        {userGames && userGames.map(g=><HistoryGameCard url={`/game/${g.id}`} enemy={userData.username==g.user1 ? g.user2 : g.user1} data={g}/>)}
         {activeGameData.gameState ? <GameCard enemy={getEnemy()} data={activeGameData} url="/game/active"/> : <></>}
       </div>
     </header>
