@@ -37,7 +37,7 @@ export default function Register() {
     e.preventDefault()
     const data = JSON.stringify({username, email, password})
 
-    const res = await fetch("http://localhost:3001/auth/signup", {
+    const res = await fetch("https://tic-tac-toe-backend-mm5k.onrender.com/auth/signup", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

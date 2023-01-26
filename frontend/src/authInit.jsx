@@ -13,7 +13,7 @@ export default function AuthInit() {
   const activeGameData = useSelector((state)=>state.activegame)
   
   const verifyLogin = async()=>{
-    const res = await fetch("http://localhost:3001/auth/verify", {
+    const res = await fetch("https://tic-tac-toe-backend-mm5k.onrender.com/auth/verify", {
       credentials: 'include',
       method: 'GET',
       mode: 'cors'
