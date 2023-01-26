@@ -19,7 +19,7 @@ export default function Home() {
       const res = await fetch(`https://tic-tac-toe-backend-mm5k.onrender.com/userdata/${userData.username}`)
       const parsed = await res.json()
       if(!parsed.success) throw new Error()
-      console.log(data.games)
+      console.log(parsed.data.games)
       setUserGames(parsed.data.games)
     }catch(e){
       console.log(e)
