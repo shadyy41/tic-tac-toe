@@ -6,8 +6,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV='dev' nodemon app.js",
-    "prod": "NODE_ENV='production' node app.js"
+    "dev": "NODE_ENV='dev' nodemon index.js",
+    "prod": "NODE_ENV='production' node index.js"
   },
   "dependencies": {
     "cookie": "^0.5.0",
