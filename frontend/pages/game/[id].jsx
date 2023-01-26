@@ -15,7 +15,7 @@ export default function Room(){
     const {id} = router.query
 
     try{
-      const res = await fetch(`http://localhost:3001/gamedata/${id}`)
+      const res = await fetch(`https://tic-tac-toe-backend-mm5k.onrender.com/gamedata/${id}`)
       const parsed = await res.json()
       if(!parsed.success) throw new Error()
       setGameData(parsed.data)
