@@ -16,6 +16,7 @@ import cookie from 'cookie'
 import { express_error } from './utils/express_error.js'
 import { router as authRouter } from './routes/auth/auth.js'
 import { router as gameDataRouter } from './routes/gamedata/gamedata.js'
+import { router as userDataRouter } from './routes/userdata/userdata.js'
 import { add_credentials } from "./middleware/add_credentials.js"
 import { get_credentials } from './utils/get_credentials.js'
 import { Game } from './models/Game.js'
@@ -43,6 +44,7 @@ app.use(add_credentials)/* validates jwt, adds data to res.locals */
 
 app.use('/auth', authRouter) // /auth/signup
 app.use('/gamedata', gameDataRouter)
+app.use('/userdata', userDataRouter)
 
 app.get('*', (req, res, next)=>{
   throw new express_error('PAGE DOES NOT EXIST', 404)
