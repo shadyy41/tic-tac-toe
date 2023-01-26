@@ -15,6 +15,7 @@ const find_user = async(req, res, next)=>{
   if(!user) return next(new express_error("INVALID USERNAME / PASSWORD", 401))
 
   req.body.crypt_pw = user.password
+  req.body.email = user.email
 
   next()
 }

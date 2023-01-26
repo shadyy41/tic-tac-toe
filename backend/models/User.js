@@ -19,7 +19,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true
-  }
+  },
+  games: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Game',
+      default: []
+    }
+  ]
 })
 
 const User =  mongoose.models.user || mongoose.model('User', userSchema)

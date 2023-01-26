@@ -1,16 +1,8 @@
-import jwt from "jsonwebtoken"
+import { get_credentials } from "../utils/get_credentials.js"
 
-const add_credentials = async(req, res, next)=>{
-  const token = req.cookies?.TOKEN
-  if(!token){
-    res.locals.authorized = false
-    res.locals.credentials = null
-    return next()
-  }
-  const JWT_SECRET = process.env.JWT_SECRET
-  const decoded = jwt.verify(token, JWT_SECRET)
-
-  res.locals.authorized = true
+const add_credentials = (req, res, next)=>{
+  const decoded = get_credentials(req.cookies?.TOKEN)
+  res.locals.authorized = (decoded) ? true : false
   res.locals.credentials = decoded
 
   next()
