@@ -83,6 +83,7 @@ export default function Home() {
       {!userGames && !activeGameData.gameState && <h2 className='text-xl'>
           No Games Found
         </h2>}
+      {console.log(userGames)}
     </div>
     <div className="w-full flex flex-col gap-4 p-4 font-semibold text-lg">
       <Link href={"/game/new"}>
