@@ -23,7 +23,6 @@ export default function Home() {
       setUserGames(parsed.data.games)
     }catch(e){
       console.log(e)
-      router.replace('/')
     }
   }
 
@@ -78,9 +77,8 @@ export default function Home() {
         </h2>
       </div>
       <div className="w-full flex flex-col gap-4 font-medium flex-shrink-0 text-lg">
-        {userGames ? <div></div> : <h2>No Games Found</h2>}
         {userGames && userGames.map(g=><HistoryGameCard url={`/game/${g.id}`} enemy={userData.username==g.user1 ? g.user2 : g.user1} data={g}/>)}
-        {activeGameData.gameState ? <GameCard enemy={getEnemy()} data={activeGameData} url="/game/active"/> : <></>}
+        {activeGameData.gameState && <GameCard enemy={getEnemy()} data={activeGameData} url="/game/active"/>}
       </div>
     </header>
     <div className="w-full flex flex-col gap-4 px-4 pb-4 font-semibold flex-shrink-0 text-lg">
